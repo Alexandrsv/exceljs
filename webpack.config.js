@@ -15,6 +15,7 @@ module.exports = {
         compress: true,
         port: 3000,
         hot: isDev,
+        watchFiles: ['src/index.html'],
         client: {
             overlay: {
                 errors: isDev,
