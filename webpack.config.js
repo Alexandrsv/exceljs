@@ -3,10 +3,26 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-console.log(path.resolve(__dirname, 'dist/favicon.png'))
+const isProd = process.env.NODE_ENV === 'production';
+const isDev = !isProd;
+
+const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
 
 module.exports = {
     mode: 'development',
+    devtool: isProd ? false : 'source-map',
+    devServer: {
+        compress: true,
+        port: 3000,
+        hot: isDev,
+        client: {
+            overlay: {
+                errors: isDev,
+                warnings: false,
+            },
+            reconnect: isDev,
+        },
+    },
     context: path.resolve(__dirname, 'src'),
     entry: './index.js',
     resolve: {
@@ -19,6 +35,10 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'index.html',
+            minify: {
+                collapseWhitespace: isProd,
+                removeComments: isProd,
+            },
         }),
         new CopyPlugin({
             patterns: [
@@ -29,7 +49,7 @@ module.exports = {
             ],
         }),
         new MiniCssExtractPlugin({
-            filename: "bundle_[hash].css",
+            filename: filename('css'),
         }),
     ],
     module: {
@@ -55,7 +75,7 @@ module.exports = {
         ],
     },
     output: {
-        filename: 'bundle_[hash].js',
+        filename: filename('js'),
         path: path.resolve(__dirname, 'dist'),
         clean: true,
     },

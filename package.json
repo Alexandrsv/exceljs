@@ -6,8 +6,8 @@
   "private": true,
   "browserslist": "> 0.25%, not dead",
   "scripts": {
-    "start": "webpack",
-    "build": "webpack --mode production",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack.config.js --hot",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Alexandrsv/exceljs#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "webpack-cli": "^4.9.2"
   },
   "devDependencies": {
@@ -28,11 +29,13 @@
     "@babel/preset-env": "^7.16.11",
     "babel-loader": "^8.2.5",
     "copy-webpack-plugin": "^10.2.4",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.0",
     "sass": "^1.50.1",
     "sass-loader": "^12.6.0",
-    "webpack": "^5.72.0"
+    "webpack": "^5.72.0",
+    "webpack-dev-server": "^4.8.1"
   }
 }

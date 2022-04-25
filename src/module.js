@@ -1,7 +1,8 @@
 console.log('module.js');
 
 async function getData() {
-  await Promise.resolve();
+  return Promise.resolve('async work');
 }
 
-getData()
+getData().then(console.log);
+
