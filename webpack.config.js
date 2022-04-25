@@ -1,7 +1,8 @@
 const path = require('path');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 const isDev = !isProd;
@@ -25,15 +26,16 @@ module.exports = {
         },
     },
     context: path.resolve(__dirname, 'src'),
-    entry: ["@babel/polyfill", './index.js'],
+    entry: ['@babel/polyfill', './index.js'],
     resolve: {
-        extensions: ['.js',],
+        extensions: ['.js'],
         alias: {
             '@': path.resolve(__dirname, 'src'),
             'core': path.resolve(__dirname, 'src/core'),
-        }
+        },
     },
     plugins: [
+        new ESLintPlugin(),
         new HtmlWebpackPlugin({
             template: 'index.html',
             minify: {
@@ -45,7 +47,7 @@ module.exports = {
             patterns: [
                 {
                     from: path.resolve(__dirname, 'src/favicon.png'),
-                    to: path.resolve(__dirname, 'dist/favicon.png')
+                    to: path.resolve(__dirname, 'dist/favicon.png'),
                 },
             ],
         }),
@@ -59,20 +61,20 @@ module.exports = {
                 test: /\.s[ac]ss$/i,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    "css-loader",
-                    "sass-loader",
+                    'css-loader',
+                    'sass-loader',
                 ],
             },
             {
                 test: /\.m?js$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: "babel-loader",
+                    loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
-                    }
-                }
-            }
+                        presets: ['@babel/preset-env'],
+                    },
+                },
+            },
         ],
     },
     output: {
