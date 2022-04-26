@@ -1,6 +1,10 @@
 @import "~normalize.css";
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
+@import "header";
+@import "toolbar";
+@import "formula";
+@import "table";
 
 * {
   box-sizing: border-box;
@@ -11,4 +15,8 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
+}
+
+.excel {
+  position: relative;
 }
