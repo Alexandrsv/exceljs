@@ -1,5 +1,5 @@
 @import "~normalize.css";
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
 @import "header";
 @import "toolbar";
@@ -13,10 +13,11 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 12px;
 }
 
 .excel {
   position: relative;
+  color: #888;
 }
